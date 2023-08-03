@@ -7,11 +7,12 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>reveal.js</title>
+    <title>SeattleJS Conf Live Reactions</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/black.css" />
+    <link rel="stylesheet" href="dist/theme/night.css" />
+    <link rel="stylesheet" href="dist/custom.css" />
 
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
@@ -19,9 +20,153 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>Slide 1</section>
-        <section>Slide 2</section>
-        <section>Slide 3</section>
+        <section>
+          <video data-autoplay src="dist/media/reactions.mov" loop></video>
+          <h2>Multiplayer Reactions</h2>
+        </section>
+
+        <section>
+          <h2>👋 Hello!</h2>
+          <p>I'm @johnphamous</p>
+          <p>lead design engineer @vercel</p>
+        </section>
+
+        <section>
+          <div class="r-stack">
+            <h2>I like to build stuff</h2>
+          </div>
+        </section>
+
+        <section>
+          <div class="r-stack">
+            <video
+              data-autoplay
+              src="dist/media/power-picker.mp4"
+              loop
+              width="400px"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/sticker.mp4"
+              loop
+              width="200px"
+              style="z-index: 10; margin-left: 799px; margin-top: 357px"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/ASCII Design Engineer.mp4"
+              loop
+              width="400px"
+              style="margin-left: -52px; z-index: 10"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/Instant Preview.mp4"
+              loop
+              muted
+              width="400px"
+              style="margin-top: 460px; margin-left: 360px"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/CleanShot 2023-08-02 at 13.37.31.mp4"
+              loop
+              width="400px"
+              style="margin-top: 0; margin-left: 300px"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/yWyZdjGqNGOUhddz.mp4"
+              loop
+              muted
+              width="400px"
+              style="margin-left: -19px; margin-top: 0"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/OoK7mvJBdnfNTv9l.mp4"
+              loop
+              muted
+              width="300px"
+              style="margin-left: 702px; margin-top: -18px"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/dFdFyP5CvKanmdHf.mp4"
+              loop
+              muted
+              width="400px"
+              style="margin-right: 569px; margin-top: 409px"
+            ></video>
+            <video
+              data-autoplay
+              src="dist/media/CeWjFslmvRiIh1JO.mp4"
+              loop
+              muted
+              width="300px"
+              style="margin-left: 657px; margin-top: 480px"
+            ></video>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="left">Let's build together</h2>
+          <div class="r-hstack" style="align-items: start">
+            <div class="left">
+              <div>A component that is</div>
+              <ul>
+                <li>Multiplayer</li>
+                <li>Accessible</li>
+                <li>Resilient</li>
+              </ul>
+            </div>
+            <div style="width: 50%; margin-left: 64px">
+              <video
+                data-autoplay
+                src="dist/media/reactions-lots.mp4"
+                loop
+              ></video>
+            </div>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <div class="r-hstack">
+            <pre data-id="code-animation"><code data-trim data-line-numbers>
+		  let planets = [
+		    { name: 'mars', diameter: 6779 },
+		  ]
+		</code></pre>
+
+            <div class="browser">
+              <h2>hello world</h2>
+            </div>
+          </div>
+        </section>
+        <section data-auto-animate>
+          <pre data-id="code-animation"><code data-trim data-line-numbers>
+		  let planets = [
+		    { name: 'mars', diameter: 6779 },
+		    { name: 'earth', diameter: 12742 },
+		    { name: 'jupiter', diameter: 139820 }
+		  ]
+		</code></pre>
+        </section>
+        <section data-auto-animate>
+          <pre data-id="code-animation"><code data-trim data-line-numbers>
+		  let circumferenceReducer = ( c, planet ) => {
+		    return c + planet.diameter * Math.PI;
+		  }
+
+		  let planets = [
+		    { name: 'mars', diameter: 6779 },
+		    { name: 'earth', diameter: 12742 },
+		    { name: 'jupiter', diameter: 139820 }
+		  ]
+
+		  let c = planets.reduce( circumferenceReducer, 0 )
+		</code></pre>
+        </section>
       </div>
     </div>
 
