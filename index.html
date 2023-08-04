@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="dist/custom.css" />
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/tomorrow-night-bright.min.css"
+    />
   </head>
   <body>
     <div class="reveal">
@@ -178,41 +181,89 @@
         </section>
 
         <section data-auto-animate>
-          <div class="r-hstack">
-            <pre data-id="code-animation"><code data-trim data-line-numbers>
-		  let planets = [
-		    { name: 'mars', diameter: 6779 },
-		  ]
-		</code></pre>
-
-            <div class="browser">
-              <h2>hello world</h2>
-            </div>
-          </div>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-animation"><code data-trim data-line-numbers>
-		  let planets = [
-		    { name: 'mars', diameter: 6779 },
-		    { name: 'earth', diameter: 12742 },
-		    { name: 'jupiter', diameter: 139820 }
-		  ]
+          <pre
+            data-id="code-animation"
+          ><code data-trim class="language-javascript">
+const REACTIONS = [
+  { label: "fire", display: "🔥" },
+  { label: "heart", display: "❤️" },
+  { label: "octopus", display: "🐙" },
+  { label: "mountain", display: "🏔️" },
+];
 		</code></pre>
         </section>
+
         <section data-auto-animate>
-          <pre data-id="code-animation"><code data-trim data-line-numbers>
-		  let circumferenceReducer = ( c, planet ) => {
-		    return c + planet.diameter * Math.PI;
-		  }
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript">
+const REACTIONS = [
+  { label: "fire", display: "🔥" },
+  { label: "heart", display: "❤️" },
+  { label: "octopus", display: "🐙" },
+  { label: "mountain", display: "🏔️" },
+];
 
-		  let planets = [
-		    { name: 'mars', diameter: 6779 },
-		    { name: 'earth', diameter: 12742 },
-		    { name: 'jupiter', diameter: 139820 }
-		  ]
-
-		  let c = planets.reduce( circumferenceReducer, 0 )
+export default function Reactions() {
+  return (
+    &lt;aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) =&gt; (
+        &lt;button
+          key={label}
+          aria-label={`${label} reaction`}
+          className="w-10 h-10"
+        >
+          {display}
+        &lt;/button&gt;
+      ))}
+    &lt;/aside&gt;
+  );
+}
 		</code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="1-6|10-14|15-23">
+const REACTIONS = [
+  { label: "fire", display: "🔥" },
+  { label: "heart", display: "❤️" },
+  { label: "octopus", display: "🐙" },
+  { label: "mountain", display: "🏔️" },
+];
+
+export default function Reactions() {
+  return (
+    &lt;aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) =&gt; (
+        &lt;button
+          key={label}
+          aria-label={`${label} reaction`}
+          className="w-10 h-10"
+        >
+          {display}
+        &lt;/button&gt;
+      ))}
+    &lt;/aside&gt;
+  );
+}
+		</code></pre>
+        </section>
+
+        <section>
+          <iframe
+            data-src="https://live-reactions-one.vercel.app/1"
+            data-preload
+          ></iframe>
         </section>
       </div>
     </div>
@@ -227,7 +278,17 @@
       // - https://revealjs.com/config/
       Reveal.initialize({
         hash: true,
-
+        autoPlayMedia: true,
+        highlight: {
+          beforeHighlight: (hljs) => {
+            hljs.configure({
+              languages: ["javascript"],
+              ignoreUnescapedHTML: false,
+            });
+          },
+        },
+        preloadIframes: true,
+        transition: "fade",
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
