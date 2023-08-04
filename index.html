@@ -150,8 +150,10 @@
             <div class="left">
               <div data-id="0">This use to be hard</div>
               <ul>
+                <li>Learning sockets</li>
                 <li>Scaling servers</li>
-                <li>Client connections</li>
+                <li>Client state</li>
+                <li>Conflict resolution</li>
               </ul>
             </div>
             <div style="width: 50%; margin-left: 64px">
@@ -170,8 +172,10 @@
             <div class="left">
               <div data-id="0" style="opacity: 0.2">This use to be hard</div>
               <ul>
+                <li><s>Learning sockets</s></li>
                 <li><s>Scaling servers</s></li>
-                <li><s>Client connections</s></li>
+                <li><s>Client state</s></li>
+                <li><s>Conflict resolution</s></li>
               </ul>
             </div>
             <div style="width: 50%; margin-left: 64px">
@@ -549,6 +553,142 @@ module.exports = {
           <iframe
             class="iframe"
             data-src="https://live-reactions-one.vercel.app/4"
+            data-preload
+          ></iframe>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers>
+
+			    <script type="text/template">
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                },
+              ]);
+            }}
+          >
+          </button>
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="|12-13">
+
+			    <script type="text/template">
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle()
+                },
+              ]);
+            }}
+          >
+          </button>
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-3"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="|1-6|8-15">
+
+			    <script type="text/template">
+export const getRandomAnimationCurve = () => {
+  const randomX2 = `${Math.random() * 5}%`;
+  const randomY2 = `${Math.random() * 50 + 50}%`;
+
+  return `cubic-bezier(100%, 100%, ${randomX2}, ${randomY2})`;
+};
+
+export const getRandomAngle = () => {
+  // Decide on whether the reaction is facing left or right.
+  const direction = Math.random() < 0.5 ? 1 : -1;
+  // Decide the starting angle of the reaction.
+  const startingAngle = Math.floor(Math.random() * 90);
+
+  return direction * startingAngle;
+};
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers>
+
+			    <script type="text/template">
+              <div aria-hidden className="absolute inset-0">
+                {reactions.map((reaction) => {
+                  return (
+                    <div
+                      key={reaction.id}
+                      className="absolute animate-reaction"
+                    >
+                      {display}
+                    </div>
+                  );
+                })}
+              </div>
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="7-10">
+
+			    <script type="text/template">
+              <div aria-hidden className="absolute inset-0">
+                {reactions.map((reaction) => {
+                  return (
+                    <div
+                      key={reaction.id}
+                      className="absolute animate-reaction"
+                      style={{
+                        // Sets transform: rotate();
+                        "--starting-angle": `${reaction.startingAngle}deg`,
+                        animationTimingFunction: reaction.curve,
+                      }}
+                    >
+                      {display}
+                    </div>
+                  );
+                })}
+              </div>
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section>
+          <iframe
+            class="iframe"
+            data-src="https://live-reactions-one.vercel.app/5"
             data-preload
           ></iframe>
         </section>
