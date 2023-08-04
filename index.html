@@ -183,7 +183,7 @@
         <section data-auto-animate>
           <pre
             data-id="code-animation"
-          ><code data-trim class="language-javascript">
+          ><code data-trim class="language-javascript" data-line-numbers>
 const REACTIONS = [
   { label: "fire", display: "🔥" },
   { label: "heart", display: "❤️" },
@@ -196,7 +196,8 @@ const REACTIONS = [
         <section data-auto-animate>
           <pre
             data-id="code-animation"
-          ><code data-trim data-noescape class="language-javascript javascript">
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers>
+		<script type="text/template">
 const REACTIONS = [
   { label: "fire", display: "🔥" },
   { label: "heart", display: "❤️" },
@@ -206,30 +207,34 @@ const REACTIONS = [
 
 export default function Reactions() {
   return (
-    &lt;aside
+    <aside
       className="flex items-center justify-center w-full h-full gap-2 text-4xl"
       role="group"
       aria-label="Live stream reactions"
     >
-      {REACTIONS.map(({ display, label }) =&gt; (
-        &lt;button
-          key={label}
-          aria-label={`${label} reaction`}
-          className="w-10 h-10"
-        >
-          {display}
-        &lt;/button&gt;
-      ))}
-    &lt;/aside&gt;
+      {REACTIONS.map(({ display, label }) => {
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="w-10 h-10"
+          >
+            {display}
+          </button>
+        ))}
+    </aside>
   );
 }
+		</script>
 		</code></pre>
         </section>
 
         <section data-auto-animate>
           <pre
             data-id="code-animation"
-          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="1-6|10-14|15-23">
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="1-6|10-14|15-24">
+
+		<script type="text/template">
 const REACTIONS = [
   { label: "fire", display: "🔥" },
   { label: "heart", display: "❤️" },
@@ -239,23 +244,25 @@ const REACTIONS = [
 
 export default function Reactions() {
   return (
-    &lt;aside
+    <aside
       className="flex items-center justify-center w-full h-full gap-2 text-4xl"
       role="group"
       aria-label="Live stream reactions"
     >
-      {REACTIONS.map(({ display, label }) =&gt; (
-        &lt;button
-          key={label}
-          aria-label={`${label} reaction`}
-          className="w-10 h-10"
-        >
-          {display}
-        &lt;/button&gt;
-      ))}
-    &lt;/aside&gt;
+      {REACTIONS.map(({ display, label }) => {
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="w-10 h-10"
+          >
+            {display}
+          </button>
+        ))}
+    </aside>
   );
 }
+</script>
 		</code></pre>
         </section>
 
