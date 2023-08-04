@@ -25,3 +25,8 @@
   scale: 0.4;
   right: -292px;
 }
+
+.iframe {
+  width: 80vw;
+  aspect-ratio: 4/3;
+}

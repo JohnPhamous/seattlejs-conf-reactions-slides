@@ -272,6 +272,286 @@ export default function Reactions() {
             data-preload
           ></iframe>
         </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="2|20-25|28-37|28|29-31|32-36">
+
+		<script type="text/template">
+export default function Reactions() {
+  const [allReactions, setAllReactions] = useState([]);
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="w-10 h-10"
+            onClick={() => {
+              setAllReactions((prev) => [
+                ...prev,
+                { id: generateRandomId(), label },
+              ]);
+            }}
+          >
+            {display}
+            <div aria-live="polite" role="log" aria-atomic>
+              <div className="sr-only">
+                {reactions.length} {label} reactions
+              </div>
+              <div aria-hidden>
+                {reactions.map((reaction) => {
+                  return <div key={reaction.id}>{display}</div>;
+                })}
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </aside>
+  );
+}
+</script>
+		</code></pre>
+        </section>
+
+        <section>
+          <iframe
+            class="iframe"
+            data-src="https://live-reactions-one.vercel.app/2"
+            data-preload
+          ></iframe>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="1-2|7-18|42">
+
+		<script type="text/template">
+/** In milliseconds. */
+const ANIMATION_DURATION = 2000;
+
+export default function Reactions() {
+  const [allReactions, setAllReactions] = useState([]);
+
+  // Remove stale reactions.
+  useInterval(() => {
+    const now = new Date().getTime();
+
+    setAllReactions((reactions) =>
+      reactions.filter((reaction) => {
+        const timePassed = now - reaction.timestamp;
+
+        return timePassed < ANIMATION_DURATION;
+      })
+    );
+  }, ANIMATION_DURATION);
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="w-10 h-10"
+            onClick={() => {
+              setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                },
+              ]);
+            }}
+          >
+            {display}
+            <div aria-live="polite" role="log" aria-atomic>
+              <div className="sr-only">
+                {reactions.length} {label} reactions
+              </div>
+              <div aria-hidden>
+                {reactions.map((reaction) => {
+</script>
+		</code></pre>
+        </section>
+
+        <section>
+          <iframe
+            class="iframe"
+            data-src="https://live-reactions-one.vercel.app/3"
+            data-preload
+          ></iframe>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape data-line-numbers>
+module.exports = {
+  theme: {
+    extend: {
+    },
+  },
+};
+		</code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape data-line-numbers>
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        reaction: "travel 2s ease-in-out 1 forwards",
+      },
+      keyframes: {
+        travel: {
+          "0%": {
+            transform: "translate(0, -50px)",
+            rotate: "0",
+            scale: "0",
+            opacity: "0",
+          },
+          "5%": {
+            scale: "0.1",
+            opacity: "0.2",
+          },
+          "40%": {
+            opacity: "1",
+            scale: "0.3",
+          },
+          "60%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translate(0, -80px)",
+            scale: "1.5",
+            opacity: "0",
+          },
+        },
+      },
+    },
+  },
+};
+		</code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape data-line-numbers="4-6|9-14|15-22|23-30">
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        reaction: "travel 2s ease-in-out 1 forwards",
+      },
+      keyframes: {
+        travel: {
+          "0%": {
+            transform: "translate(0, -50px)",
+            rotate: "0",
+            scale: "0",
+            opacity: "0",
+          },
+          "5%": {
+            scale: "0.1",
+            opacity: "0.2",
+          },
+          "40%": {
+            opacity: "1",
+            scale: "0.3",
+          },
+          "60%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translate(0, -80px)",
+            scale: "1.5",
+            opacity: "0",
+          },
+        },
+      },
+    },
+  },
+};
+		</code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers>
+
+		      <script type="text/template">
+<div aria-hidden>
+  {reactions.map((reaction) => {
+    return (
+      <div
+        key={reaction.id}
+      >
+        {display}
+      </div>
+    );
+  })}
+</div>
+		      </script>
+		      </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-javascript javascript"  data-line-numbers="6">
+
+		      <script type="text/template">
+<div aria-hidden>
+  {reactions.map((reaction) => {
+    return (
+      <div
+        key={reaction.id}
+        className="animate-reaction"
+      >
+        {display}
+      </div>
+    );
+  })}
+</div>
+		      </script>
+		      </code></pre>
+        </section>
+
+        <section>
+          <iframe
+            class="iframe"
+            data-src="https://live-reactions-one.vercel.app/4"
+            data-preload
+          ></iframe>
+        </section>
       </div>
     </div>
 
