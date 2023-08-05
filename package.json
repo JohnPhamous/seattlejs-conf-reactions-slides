@@ -10,7 +10,8 @@
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
-    "build": "gulp build"
+    "build": "gulp build",
+    "build:liveblocks": "onchange liveblocks/app.js -- esbuild liveblocks/app.js --bundle --outfile=dist/liveblocks.js"
   },
   "author": {
     "name": "Hakim El Hattab",
@@ -100,5 +101,10 @@
       "no-eq-null": 2,
       "no-unused-expressions": 0
     }
+  },
+  "dependencies": {
+    "@liveblocks/client": "^1.2.1",
+    "esbuild": "^0.18.17",
+    "onchange": "^7.1.0"
   }
 }

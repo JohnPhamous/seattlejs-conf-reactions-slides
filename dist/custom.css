@@ -62,3 +62,9 @@
   right: 0;
   z-index: 10;
 }
+
+.links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
