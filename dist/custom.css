@@ -30,3 +30,35 @@
   width: 80vw;
   aspect-ratio: 4/3;
 }
+
+.split-view {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.split-view .iframe,
+.split-view video {
+  width: 40vw;
+}
+
+.final-split-view {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.final-split-view .iframe {
+  width: 40vw;
+}
+
+.final-split-view video {
+  width: 30vw;
+}
+
+.artur {
+  position: absolute;
+  width: 100px;
+  right: 0;
+  z-index: 10;
+}

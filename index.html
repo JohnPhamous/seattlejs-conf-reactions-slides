@@ -692,6 +692,645 @@ export const getRandomAngle = () => {
             data-preload
           ></iframe>
         </section>
+
+        <section data-auto-animate>
+          <h2>Installing Liveblocks</h2>
+          <pre
+            data-id="code-animation"
+          ><code data-trim data-noescape class="language-bash bash">
+
+			    <script type="text/template">
+npm install @liveblocks/client @liveblocks/react
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="1-6|8-14|10-12">
+
+			    <script type="text/template">
+import { createClient } from "@liveblocks/client";
+import { RoomProvider } from "@/liveblocks.config";
+
+const client = createClient({
+  publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY,
+});
+
+export default function Reactions() {
+  return (
+    <RoomProvider id="seattlejs-conf">
+      // Rest of app
+    </RoomProvider>
+  )
+}
+			    </script>
+			    </code></pre>
+        </section>
+
+        <section>
+          <iframe
+            class="iframe"
+            data-src="https://live-reactions-one.vercel.app/5"
+            data-preload
+          ></iframe>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers>
+
+				  <script type="text/template">
+const Reactions = () => {
+  const [allReactions, setAllReactions] = useState([]);
+  // rest of component
+}
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="1,5">
+
+				  <script type="text/template">
+import { useBroadcastEvent } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allReactions, setAllReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+  // rest of component
+}
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="|19-34|23-34">
+
+				  <script type="text/template">
+import { useBroadcastEvent } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allReactions, setAllReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle(),
+                },
+              ]);
+            }}
+          >
+	    {/* rest of component */}
+	  </button>
+        )
+    </aside>
+  );
+}
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="23-37|24-30|32|33-36">
+
+				  <script type="text/template">
+import { useBroadcastEvent } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allReactions, setAllReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              const newReaction = {
+                id: generateRandomId(),
+                label,
+                timestamp: new Date().getTime(),
+                curve: getRandomAnimationCurve(),
+                startingAngle: getRandomAngle(),
+              };
+
+              setAllReactions((prev) => [...prev, newReaction]);
+              broadcast({
+                type: "reaction",
+                emoji: label,
+              });
+            }}
+          >
+	    {/* rest of component */}
+	  </button>
+        );
+      })}
+    </aside>
+  );
+};
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section>
+          <iframe
+            class="iframe"
+            data-src="https://live-reactions-one.vercel.app/6"
+            data-preload
+          ></iframe>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers>
+
+				  <script type="text/template">
+import { useBroadcastEvent } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allReactions, setAllReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+
+  // Remove stale reactions.
+  useInterval(() => {
+    const now = new Date().getTime();
+
+    setAllReactions((reactions) =>
+      reactions.filter((reaction) => {
+        const timePassed = now - reaction.timestamp;
+
+        return timePassed < ANIMATION_DURATION;
+      })
+    );
+  }, ANIMATION_DURATION);
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              const newReaction = {
+                id: generateRandomId(),
+                label,
+                timestamp: new Date().getTime(),
+                curve: getRandomAnimationCurve(),
+                startingAngle: getRandomAngle(),
+              };
+
+              setAllReactions((prev) => [...prev, newReaction]);
+              broadcast({
+                type: "reaction",
+                emoji: label,
+              });
+            }}
+          >
+            <span className="relative z-10">{display}</span>
+            <div aria-live="polite" role="log" aria-atomic>
+              <div className="sr-only">
+                {reactions.length} {label} reactions
+              </div>
+              <div aria-hidden className="absolute inset-0">
+                {reactions.map((reaction) => {
+                  return (
+                    <div
+                      key={reaction.id}
+                      className={`absolute animate-reaction`}
+                      style={{
+                        // Sets transform: rotate();
+                        "--starting-angle": `${reaction.startingAngle}deg`,
+                        animationTimingFunction: reaction.curve,
+                      }}
+                    >
+                      {display}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </aside>
+  );
+};
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="1,5,8-19|5,8-19">
+
+				  <script type="text/template">
+import { useBroadcastEvent, useEventListener } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allReactions, setAllReactions] = useState([]);
+  const [allRemoteReactions, setAllRemoteReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+
+  useEventListener(({ event }) => {
+    setAllRemoteReactions((prev) => [
+      ...prev,
+      {
+        id: generateRandomId(),
+        label: event.emoji,
+        timestamp: new Date().getTime(),
+        curve: getRandomAnimationCurve(),
+        startingAngle: getRandomAngle(),
+      },
+    ]);
+  });
+
+  // Remove stale reactions.
+  useInterval(() => {
+    const now = new Date().getTime();
+
+    setAllReactions((reactions) =>
+      reactions.filter((reaction) => {
+        const timePassed = now - reaction.timestamp;
+
+        return timePassed < ANIMATION_DURATION;
+      })
+    );
+  }, ANIMATION_DURATION);
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              const newReaction = {
+                id: generateRandomId(),
+                label,
+                timestamp: new Date().getTime(),
+                curve: getRandomAnimationCurve(),
+                startingAngle: getRandomAngle(),
+              };
+
+              setAllReactions((prev) => [...prev, newReaction]);
+              broadcast({
+                type: "reaction",
+                emoji: label,
+              });
+            }}
+          >
+            <span className="relative z-10">{display}</span>
+            <div aria-live="polite" role="log" aria-atomic>
+              <div className="sr-only">
+                {reactions.length} {label} reactions
+              </div>
+              <div aria-hidden className="absolute inset-0">
+                {reactions.map((reaction) => {
+                  return (
+                    <div
+                      key={reaction.id}
+                      className={`absolute animate-reaction`}
+                      style={{
+                        // Sets transform: rotate();
+                        "--starting-angle": `${reaction.startingAngle}deg`,
+                        animationTimingFunction: reaction.curve,
+                      }}
+                    >
+                      {display}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </aside>
+  );
+};
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="4|4-5">
+
+				  <script type="text/template">
+import { useBroadcastEvent, useEventListener } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allLocalReactions, setAllLocalReactions] = useState([]);
+  const [allRemoteReactions, setAllRemoteReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+
+  useEventListener(({ event }) => {
+    setAllRemoteReactions((prev) => [
+      ...prev,
+      {
+        id: generateRandomId(),
+        label: event.emoji,
+        timestamp: new Date().getTime(),
+        curve: getRandomAnimationCurve(),
+        startingAngle: getRandomAngle(),
+      },
+    ]);
+  });
+
+  // Remove stale reactions.
+  useInterval(() => {
+    const now = new Date().getTime();
+
+    setAllLocalReactions((reactions) =>
+      reactions.filter((reaction) => {
+        const timePassed = now - reaction.timestamp;
+
+        return timePassed < ANIMATION_DURATION;
+      })
+    );
+  }, ANIMATION_DURATION);
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const reactions = allLocalReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              const newReaction = {
+                id: generateRandomId(),
+                label,
+                timestamp: new Date().getTime(),
+                curve: getRandomAnimationCurve(),
+                startingAngle: getRandomAngle(),
+              };
+
+              setAllLocalReactions((prev) => [...prev, newReaction]);
+              broadcast({
+                type: "reaction",
+                emoji: label,
+              });
+            }}
+          >
+            <span className="relative z-10">{display}</span>
+            <div aria-live="polite" role="log" aria-atomic>
+              <div className="sr-only">
+                {reactions.length} {label} reactions
+              </div>
+              <div aria-hidden className="absolute inset-0">
+                {reactions.map((reaction) => {
+                  return (
+                    <div
+                      key={reaction.id}
+                      className={`absolute animate-reaction`}
+                      style={{
+                        // Sets transform: rotate();
+                        "--starting-angle": `${reaction.startingAngle}deg`,
+                        animationTimingFunction: reaction.curve,
+                      }}
+                    >
+                      {display}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </aside>
+  );
+};
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section>
+          <div class="split-view">
+            <iframe
+              class="iframe"
+              data-src="https://live-reactions-one.vercel.app/6"
+              data-preload
+            ></iframe>
+            <iframe
+              class="iframe"
+              data-src="https://live-reactions-one.vercel.app/6"
+              data-preload
+            ></iframe>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <pre
+            data-id="code-animation-2"
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="43-448|73-75|77|21-34">
+
+				  <script type="text/template">
+import { useBroadcastEvent, useEventListener } from "@/liveblocks.config";
+
+const Reactions = () => {
+  const [allLocalReactions, setAllLocalReactions] = useState([]);
+  const [allRemoteReactions, setAllRemoteReactions] = useState([]);
+  const broadcast = useBroadcastEvent();
+
+  useEventListener(({ event }) => {
+    setAllRemoteReactions((prev) => [
+      ...prev,
+      {
+        id: generateRandomId(),
+        label: event.emoji,
+        timestamp: new Date().getTime(),
+        curve: getRandomAnimationCurve(),
+        startingAngle: getRandomAngle(),
+      },
+    ]);
+  });
+
+  // Remove stale reactions.
+  useInterval(() => {
+    const now = new Date().getTime();
+
+    const cleanup = (reactions) =>
+      reactions.filter((reaction) => {
+        const timePassed = now - reaction.timestamp;
+
+        return timePassed < ANIMATION_DURATION;
+      });
+
+    setAllLocalReactions(cleanup);
+    setAllRemoteReactions(cleanup);
+  }, ANIMATION_DURATION);
+
+  return (
+    <aside
+      className="flex items-center justify-center w-full h-full gap-2 text-4xl"
+      role="group"
+      aria-label="Live stream reactions"
+    >
+      {REACTIONS.map(({ display, label }) => {
+        const localReactions = allLocalReactions.filter(
+          (reaction) => reaction.label === label
+        );
+        const remoteReactions = allRemoteReactions.filter(
+          (reaction) => reaction.label === label
+        );
+
+        return (
+          <button
+            key={label}
+            aria-label={`${label} reaction`}
+            className="relative w-10 h-10"
+            onClick={() => {
+              const newReaction = {
+                id: generateRandomId(),
+                label,
+                timestamp: new Date().getTime(),
+                curve: getRandomAnimationCurve(),
+                startingAngle: getRandomAngle(),
+              };
+
+              setAllLocalReactions((prev) => [...prev, newReaction]);
+              broadcast({
+                type: "reaction",
+                emoji: label,
+              });
+            }}
+          >
+            <span className="relative z-10">{display}</span>
+            <div aria-live="polite" role="log" aria-atomic>
+              <div className="sr-only">
+                {localReactions.length + remoteReactions.length} {label} reactions
+              </div>
+              <div aria-hidden className="absolute inset-0">
+                {[...localReactions, ...remoteReactions].map((reaction) => {
+                  return (
+                    <div
+                      key={reaction.id}
+                      className={`absolute animate-reaction`}
+                      style={{
+                        // Sets transform: rotate();
+                        "--starting-angle": `${reaction.startingAngle}deg`,
+                        animationTimingFunction: reaction.curve,
+                      }}
+                    >
+                      {display}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </aside>
+  );
+};
+				  </script>
+				  </code></pre>
+        </section>
+
+        <section>
+          <div class="split-view">
+            <iframe
+              class="iframe"
+              data-src="https://live-reactions-one.vercel.app/7"
+              data-preload
+            ></iframe>
+            <iframe
+              class="iframe"
+              data-src="https://live-reactions-one.vercel.app/7"
+              data-preload
+            ></iframe>
+          </div>
+        </section>
+
+        <section>
+          <h2>Done!</h2>
+          <div class="final-split-view">
+            <video data-autoplay src="dist/media/ship.mp4" loop></video>
+            <iframe
+              class="iframe"
+              data-src="https://www.expensive.toys/toys/reactions"
+              data-preload
+            ></iframe>
+            <img src="dist/media/artur.png" alt="" class="artur" />
+          </div>
+        </section>
       </div>
     </div>
 
@@ -709,7 +1348,7 @@ export const getRandomAngle = () => {
         highlight: {
           beforeHighlight: (hljs) => {
             hljs.configure({
-              languages: ["javascript"],
+              languages: ["javascript", "bash"],
               ignoreUnescapedHTML: false,
             });
           },
