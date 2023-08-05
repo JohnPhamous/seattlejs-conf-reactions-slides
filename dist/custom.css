@@ -68,3 +68,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 }
+
+code {
+  font-family: "Geist Mono (Beta)", "Cascadia Code", "Dank Mono",
+    "Operator Mono", "FiraCode NF", monospace !important;
+}
