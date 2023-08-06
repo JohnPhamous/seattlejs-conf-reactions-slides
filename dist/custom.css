@@ -130,3 +130,12 @@ code {
   pointer-events: none;
   touch-action: none;
 }
+
+.emoji-stats {
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 64px;
+}

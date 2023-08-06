@@ -24,8 +24,15 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <video data-autoplay src="dist/media/reactions.mov" loop></video>
-          <h2>Multiplayer Reactions</h2>
+          <div class="split-view">
+            <div>
+              <video data-autoplay src="dist/media/reactions.mov" loop></video>
+            </div>
+            <div>
+              <img src="dist/media/app.png" />
+              <div>dub.sh/reactions</div>
+            </div>
+          </div>
         </section>
 
         <section>
@@ -1388,6 +1395,12 @@ const Reactions = () => {
               <img src="/dist/media/x.jpg" alt="" />
               <div>X</div>
             </div>
+          </div>
+          <div class="emoji-stats">
+            <div id="fire-stat"></div>
+            <div id="heart-stat"></div>
+            <div id="octopus-stat"></div>
+            <div id="clap-stat"></div>
           </div>
         </section>
       </div>

@@ -40,8 +40,36 @@ const getStartingAngleForReaction = () => {
   return direction * startingAngle;
 };
 
+let room;
+
+async function getStats() {
+  const storage = await room.getStorage();
+  const fireReactions = storage.root.get("fireReactions").length;
+  const heartReactions = storage.root.get("heartReactions").length;
+  const octopusReactions = storage.root.get("octopusReactions").length;
+  const clapReactions = storage.root.get("clapReactions").length;
+
+  const fireDOM = document.getElementById("fire-stat");
+  const heartDOM = document.getElementById("heart-stat");
+  const octopusDOM = document.getElementById("octopus-stat");
+  const clapDOM = document.getElementById("clap-stat");
+
+  if (fireDOM) {
+    fireDOM.innerText = `🔥 ${fireReactions.toLocaleString()}`;
+  }
+  if (heartDOM) {
+    heartDOM.innerText = `❤️ ${heartReactions.toLocaleString()}`;
+  }
+  if (octopusDOM) {
+    octopusDOM.innerText = `🐙 ${octopusReactions.toLocaleString()}`;
+  }
+  if (clapDOM) {
+    clapDOM.innerText = `👏 ${clapReactions.toLocaleString()}`;
+  }
+}
+
 function run() {
-  const room = client.enter("seattlejs-conf-audience", {
+  room = client.enter("seattlejs-conf-audience", {
     initialPresence: {},
   });
 
@@ -51,6 +79,7 @@ function run() {
     finish: undefined,
     getStartingAngleForReaction,
     generateRandomCurveForReaction,
+    getStats,
   };
 
   window.reactions.react = (id) => {
@@ -131,6 +160,8 @@ function loop() {
   if (reactionsContainer) {
     reactionsContainer.appendChild(newDOMElements);
   }
+
+  getStats();
 
   requestAnimationFrame(loop);
 }

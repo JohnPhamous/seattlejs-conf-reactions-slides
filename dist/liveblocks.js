@@ -1471,66 +1471,66 @@
       unsub();
     }
   }
-  function startSyncStream(room) {
-    stopSyncStream(room.id);
-    fullSync(room);
-    unsubsByRoomId.set(room.id, [
+  function startSyncStream(room2) {
+    stopSyncStream(room2.id);
+    fullSync(room2);
+    unsubsByRoomId.set(room2.id, [
       // When the connection status changes
-      room.events.status.subscribe(() => partialSyncConnection(room)),
+      room2.events.status.subscribe(() => partialSyncConnection(room2)),
       // When storage initializes, send the update
-      room.events.storageDidLoad.subscribeOnce(() => partialSyncStorage(room)),
+      room2.events.storageDidLoad.subscribeOnce(() => partialSyncStorage(room2)),
       // Any time storage updates, send the new storage root
-      room.events.storage.subscribe(() => partialSyncStorage(room)),
+      room2.events.storage.subscribe(() => partialSyncStorage(room2)),
       // Any time "me" or "others" updates, send the new values accordingly
-      room.events.self.subscribe(() => partialSyncMe(room)),
-      room.events.others.subscribe(() => partialSyncOthers(room))
+      room2.events.self.subscribe(() => partialSyncMe(room2)),
+      room2.events.others.subscribe(() => partialSyncOthers(room2))
     ]);
   }
-  function partialSyncConnection(room) {
+  function partialSyncConnection(room2) {
     sendToPanel({
       msg: "room::sync::partial",
-      roomId: room.id,
-      status: room.getStatus()
+      roomId: room2.id,
+      status: room2.getStatus()
     });
   }
-  function partialSyncStorage(room) {
-    const root = room.getStorageSnapshot();
+  function partialSyncStorage(room2) {
+    const root = room2.getStorageSnapshot();
     if (root) {
       sendToPanel({
         msg: "room::sync::partial",
-        roomId: room.id,
+        roomId: room2.id,
         storage: root.toTreeNode("root").payload
       });
     }
   }
-  function partialSyncMe(room) {
-    const me = room.__internal.getSelf_forDevTools();
+  function partialSyncMe(room2) {
+    const me = room2.__internal.getSelf_forDevTools();
     if (me) {
       sendToPanel({
         msg: "room::sync::partial",
-        roomId: room.id,
+        roomId: room2.id,
         me
       });
     }
   }
-  function partialSyncOthers(room) {
-    const others = room.__internal.getOthers_forDevTools();
+  function partialSyncOthers(room2) {
+    const others = room2.__internal.getOthers_forDevTools();
     if (others) {
       sendToPanel({
         msg: "room::sync::partial",
-        roomId: room.id,
+        roomId: room2.id,
         others
       });
     }
   }
-  function fullSync(room) {
-    const root = room.getStorageSnapshot();
-    const me = room.__internal.getSelf_forDevTools();
-    const others = room.__internal.getOthers_forDevTools();
+  function fullSync(room2) {
+    const root = room2.getStorageSnapshot();
+    const me = room2.__internal.getSelf_forDevTools();
+    const others = room2.__internal.getOthers_forDevTools();
     sendToPanel({
       msg: "room::sync::full",
-      roomId: room.id,
-      status: room.getStatus(),
+      roomId: room2.id,
+      status: room2.getStatus(),
       storage: root?.toTreeNode("root").payload ?? null,
       me,
       others
@@ -1544,7 +1544,7 @@
       listener();
     }
   }
-  function linkDevTools(roomId, room) {
+  function linkDevTools(roomId, room2) {
     if (typeof window === "undefined") {
       return;
     }
@@ -1558,7 +1558,7 @@
         switch (msg.msg) {
           case "room::subscribe": {
             if (msg.roomId === roomId) {
-              startSyncStream(room);
+              startSyncStream(room2);
             }
             break;
           }
@@ -5467,8 +5467,8 @@ ${Array.from(traces).join("\n\n")}`
     const authManager = createAuthManager(options);
     const rooms = /* @__PURE__ */ new Map();
     function getRoom(roomId) {
-      const room = rooms.get(roomId);
-      return room ? room : null;
+      const room2 = rooms.get(roomId);
+      return room2 ? room2 : null;
     }
     function enter(roomId, options2) {
       const existingRoom = rooms.get(roomId);
@@ -5526,9 +5526,9 @@ ${Array.from(traces).join("\n\n")}`
     }
     function leave(roomId) {
       unlinkDevTools(roomId);
-      const room = rooms.get(roomId);
-      if (room !== void 0) {
-        room.destroy();
+      const room2 = rooms.get(roomId);
+      if (room2 !== void 0) {
+        room2.destroy();
         rooms.delete(roomId);
       }
     }
@@ -5601,8 +5601,32 @@ ${Array.from(traces).join("\n\n")}`
     const startingAngle = Math.floor(Math.random() * 90);
     return direction * startingAngle;
   };
+  var room;
+  async function getStats() {
+    const storage = await room.getStorage();
+    const fireReactions = storage.root.get("fireReactions").length;
+    const heartReactions = storage.root.get("heartReactions").length;
+    const octopusReactions = storage.root.get("octopusReactions").length;
+    const clapReactions = storage.root.get("clapReactions").length;
+    const fireDOM = document.getElementById("fire-stat");
+    const heartDOM = document.getElementById("heart-stat");
+    const octopusDOM = document.getElementById("octopus-stat");
+    const clapDOM = document.getElementById("clap-stat");
+    if (fireDOM) {
+      fireDOM.innerText = `\u{1F525} ${fireReactions.toLocaleString()}`;
+    }
+    if (heartDOM) {
+      heartDOM.innerText = `\u2764\uFE0F ${heartReactions.toLocaleString()}`;
+    }
+    if (octopusDOM) {
+      octopusDOM.innerText = `\u{1F419} ${octopusReactions.toLocaleString()}`;
+    }
+    if (clapDOM) {
+      clapDOM.innerText = `\u{1F44F} ${clapReactions.toLocaleString()}`;
+    }
+  }
   function run() {
-    const room = client.enter("seattlejs-conf-audience", {
+    room = client.enter("seattlejs-conf-audience", {
       initialPresence: {}
     });
     window.reactions = {
@@ -5610,7 +5634,8 @@ ${Array.from(traces).join("\n\n")}`
       remoteReactions: [],
       finish: void 0,
       getStartingAngleForReaction,
-      generateRandomCurveForReaction
+      generateRandomCurveForReaction,
+      getStats
     };
     window.reactions.react = (id) => {
       let emoji = "";
@@ -5684,6 +5709,7 @@ ${Array.from(traces).join("\n\n")}`
     if (reactionsContainer) {
       reactionsContainer.appendChild(newDOMElements);
     }
+    getStats();
     requestAnimationFrame(loop);
   }
   loop();
