@@ -68,6 +68,24 @@ async function getStats() {
   }
 }
 
+async function setModeToPresenting() {
+  const storage = await room.getStorage();
+  storage.root.set("mode", "presenting");
+}
+
+async function setModeToFinished() {
+  const storage = await room.getStorage();
+  storage.root.set("mode", "finished");
+}
+
+async function resetStorage() {
+  const storage = await room.getStorage();
+  storage.root.get("fireReactions").clear();
+  storage.root.get("heartReactions").clear();
+  storage.root.get("octopusReactions").clear();
+  storage.root.get("clapReactions").clear();
+}
+
 function run() {
   room = client.enter("seattlejs-conf-audience", {
     initialPresence: {},
@@ -80,6 +98,9 @@ function run() {
     getStartingAngleForReaction,
     generateRandomCurveForReaction,
     getStats,
+    setModeToPresenting,
+    setModeToFinished,
+    resetStorage,
   };
 
   window.reactions.react = (id) => {
