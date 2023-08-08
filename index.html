@@ -842,7 +842,7 @@ const Reactions = () => {
         <section data-auto-animate>
           <pre
             data-id="code-animation-2"
-          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="23-37|24-30|32|33-36">
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="23-38|24-33|35-38">
 
 				  <script type="text/template">
 import { useBroadcastEvent } from "@/liveblocks.config";
@@ -868,15 +868,17 @@ const Reactions = () => {
             aria-label={`${label} reaction`}
             className="relative w-10 h-10"
             onClick={() => {
-              const newReaction = {
-                id: generateRandomId(),
-                label,
-                timestamp: new Date().getTime(),
-                curve: getRandomAnimationCurve(),
-                startingAngle: getRandomAngle(),
-              };
+              setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle(),
+                },
+              ]);
 
-              setAllReactions((prev) => [...prev, newReaction]);
               broadcast({
                 type: "reaction",
                 emoji: label,
@@ -945,15 +947,17 @@ const Reactions = () => {
             aria-label={`${label} reaction`}
             className="relative w-10 h-10"
             onClick={() => {
-              const newReaction = {
-                id: generateRandomId(),
-                label,
-                timestamp: new Date().getTime(),
-                curve: getRandomAnimationCurve(),
-                startingAngle: getRandomAngle(),
-              };
+	      setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle(),
+                },
+              ]);
 
-              setAllReactions((prev) => [...prev, newReaction]);
               broadcast({
                 type: "reaction",
                 emoji: label,
@@ -996,7 +1000,7 @@ const Reactions = () => {
         <section data-auto-animate>
           <pre
             data-id="code-animation-2"
-          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="1,5,8-19|5,8-19">
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="5|8-19">
 
 				  <script type="text/template">
 import { useBroadcastEvent, useEventListener } from "@/liveblocks.config";
@@ -1049,15 +1053,17 @@ const Reactions = () => {
             aria-label={`${label} reaction`}
             className="relative w-10 h-10"
             onClick={() => {
-              const newReaction = {
-                id: generateRandomId(),
-                label,
-                timestamp: new Date().getTime(),
-                curve: getRandomAnimationCurve(),
-                startingAngle: getRandomAngle(),
-              };
+	      setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle(),
+                },
+              ]);
 
-              setAllReactions((prev) => [...prev, newReaction]);
               broadcast({
                 type: "reaction",
                 emoji: label,
@@ -1153,15 +1159,17 @@ const Reactions = () => {
             aria-label={`${label} reaction`}
             className="relative w-10 h-10"
             onClick={() => {
-              const newReaction = {
-                id: generateRandomId(),
-                label,
-                timestamp: new Date().getTime(),
-                curve: getRandomAnimationCurve(),
-                startingAngle: getRandomAngle(),
-              };
+	      setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle(),
+                },
+              ]);
 
-              setAllLocalReactions((prev) => [...prev, newReaction]);
               broadcast({
                 type: "reaction",
                 emoji: label,
@@ -1219,7 +1227,7 @@ const Reactions = () => {
         <section data-auto-animate>
           <pre
             data-id="code-animation-2"
-          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="43-448|73-75|77|21-34">
+          ><code data-trim data-noescape class="language-javascript javascript" data-line-numbers="43-48|75-77|79|21-34">
 
 				  <script type="text/template">
 import { useBroadcastEvent, useEventListener } from "@/liveblocks.config";
@@ -1277,15 +1285,17 @@ const Reactions = () => {
             aria-label={`${label} reaction`}
             className="relative w-10 h-10"
             onClick={() => {
-              const newReaction = {
-                id: generateRandomId(),
-                label,
-                timestamp: new Date().getTime(),
-                curve: getRandomAnimationCurve(),
-                startingAngle: getRandomAngle(),
-              };
+	      setAllReactions((prev) => [
+                ...prev,
+                {
+                  id: generateRandomId(),
+                  label,
+                  timestamp: new Date().getTime(),
+                  curve: getRandomAnimationCurve(),
+                  startingAngle: getRandomAngle(),
+                },
+              ]);
 
-              setAllLocalReactions((prev) => [...prev, newReaction]);
               broadcast({
                 type: "reaction",
                 emoji: label,
